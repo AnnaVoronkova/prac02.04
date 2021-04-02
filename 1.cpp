@@ -1,18 +1,41 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <string.h>
 using namespace std;
 
 int main(){
-    int k = 0;
-    for(int i = 2422000; i <= 2422080; i++){
-        for(int j = 2; j < i; j++){
-            if(i%j == 0){
-               k++;
+    int a, b;
+    ifstream input ("2.txt");
+    input >> a >> b;
+    int mas[b];
+    for(int  i = 0; i < b; i++){
+        input >> mas[i];
+    }
+    int t = 0;
+    for(int i = 0; i < b; i++){
+        for (int j = 0; j < b - 1; j++){
+            if(mas[j] > mas[j+1]){
+                t = mas[j];
+                mas[j] = mas[j+1];
+                mas[j+1] = t;
             }
         }
-        if (k == 0){
-            cout << i << " ";
-        }
-        k = 0;
     }
+    int k = 0;
+    for(int i = 0; i < b; i++){
+        if(a - mas[i] >= 0){
+            a -= mas[i];
+            k++;
+        }
+    }
+    cout << k << " ";
+    for(int i = k; i < b; i++){
+        if(a - mas[i] + mas[k-1] >= 0){
+            a = a - mas[i] + mas[k-1];
+            k = i + 1;
+        }
+    }
+    cout << mas[k - 1];
     return 0;
 }
