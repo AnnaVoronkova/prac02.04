@@ -2,17 +2,22 @@
 using namespace std;
 
 int main(){
-    int k = 0;
-    for(int i = 2422000; i <= 2422080; i++){
-        for(int j = 2; j < i; j++){
+    for(int i = 95632; i <= 95700; i++){
+        int mas[1000];
+        int a = 0;
+        int k = 0;
+        for(int j = 2; j <= i; j+=2){
             if(i%j == 0){
+               a++;
+               mas[k] = j;
                k++;
             }
         }
-        if (k == 0){
-            cout << i << " ";
+        if(a == 6){
+            cout << mas[0] << " " << mas[1] << " " << mas[2] << " " << mas[3] << " " << mas[4] << " " << mas[5] << endl;
         }
-        k = 0;
     }
     return 0;
 }
+
+
